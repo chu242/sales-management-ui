@@ -51,6 +51,8 @@ function ProductDetail({ id }: { id: number }) {
       <dl className="details">
         <dt>ID</dt>
         <dd>{product.id}</dd>
+        <dt>Code</dt>
+        <dd>{product.code}</dd>
         <dt>Price</dt>
         <dd>{formatMoney(product.price)}</dd>
         <dt>Stock</dt>

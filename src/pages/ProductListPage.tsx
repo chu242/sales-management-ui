@@ -40,7 +40,8 @@ export function ProductListPage() {
       {products && (
         <DataTable
           columns={[
-            { header: 'Name', render: (p) => <Link to={`/products/${p.id}`}>{p.name}</Link> },
+            { header: 'Code', render: (p) => <Link to={`/products/${p.id}`}>{p.code}</Link> },
+            { header: 'Name', render: (p) => p.name },
             { header: 'Price', render: (p) => formatMoney(p.price), align: 'right' },
             { header: 'Stock', render: (p) => p.stock, align: 'right' },
             {

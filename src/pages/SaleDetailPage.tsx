@@ -26,7 +26,7 @@ function SaleDetail({ id }: { id: number }) {
 
   return (
     <>
-      <PageHeader title={`Sale #${sale.id}`} />
+      <PageHeader title={`Sale ${sale.code}`} />
       <Notice />
 
       <dl className="details">

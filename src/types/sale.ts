@@ -13,6 +13,7 @@ export interface SaleDetail {
 // SaleResponse. sale_date is UTC without a timezone suffix, e.g. "2026-10-23T06:37:23".
 export interface Sale {
   id: number
+  code: string // set by the backend, e.g. "S0001"
   sale_date: string
   total_amount: string
   details: SaleDetail[]
