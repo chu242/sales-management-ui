@@ -28,7 +28,21 @@ export function parseApiDate(value: string): Date {
   return new Date(hasTimezone ? value : `${value}Z`)
 }
 
-// Shown in the user's local time zone, e.g. "Oct 23, 2026, 1:07 PM".
+function pad(value: number): string {
+  return String(value).padStart(2, '0')
+}
+
+// The local calendar day of a date, as yyyy-mm-dd (the value of an <input type="date">).
+export function toDateInputValue(value: string): string {
+  const date = parseApiDate(value)
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+}
+
+// Shown in the user's local time zone as yyyy/mm/dd HH:mm:ss, e.g. "2026/10/23 13:07:23".
 export function formatDateTime(value: string): string {
-  return parseApiDate(value).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })
+  const date = parseApiDate(value)
+  if (Number.isNaN(date.getTime())) return value
+  const day = `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())}`
+  const time = `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+  return `${day} ${time}`
 }

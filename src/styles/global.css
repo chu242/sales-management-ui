@@ -423,6 +423,20 @@ select[aria-invalid='true'] {
   justify-content: flex-end;
 }
 
+.search-form {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+/* Date and text inputs have different natural heights. */
+.search-form input,
+.search-form .button {
+  height: 40px;
+}
+
 .sale-items {
   display: flex;
   flex-direction: column;

@@ -66,7 +66,7 @@ export function DashboardPage() {
         <h2>Recent sales</h2>
         <DataTable
           columns={[
-            { header: 'Sale', render: (s) => <Link to={`/sales/${s.id}`}>#{s.id}</Link> },
+            { header: 'Sale Code', render: (s) => <Link to={`/sales/${s.id}`}>{s.code}</Link> },
             { header: 'Date', render: (s) => formatDateTime(s.sale_date) },
             { header: 'Items', render: (s) => s.details.length, align: 'right' },
             { header: 'Total', render: (s) => formatMoney(s.total_amount), align: 'right' },
