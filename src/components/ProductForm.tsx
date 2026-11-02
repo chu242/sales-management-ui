@@ -86,6 +86,12 @@ export function ProductForm({ initial, submitLabel, onSubmit, onCancel }: Produc
     <form className="form" onSubmit={handleSubmit} noValidate>
       {submitError !== null && <ErrorMessage error={submitError} />}
 
+      {initial && (
+        <FormField id="product-code" label="Code">
+          <input id="product-code" type="text" value={initial.code} readOnly />
+        </FormField>
+      )}
+
       <FormField id="product-name" label="Name" error={fieldErrors.name}>
         <input type="text" maxLength={100} autoComplete="off" autoFocus {...inputProps('name')} />
       </FormField>

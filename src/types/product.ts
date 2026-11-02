@@ -5,6 +5,7 @@
 // ProductResponse
 export interface Product {
   id: number
+  code: string // set by the backend, e.g. "P0001"
   name: string
   price: string
   stock: number
