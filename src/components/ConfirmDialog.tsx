@@ -13,7 +13,7 @@ interface ConfirmDialogProps {
 
 // Modal confirmation built on the native <dialog> element,
 // which gives focus trapping and Escape-to-close for free.
-export function ConfirmDialog({ open, title, message, confirmLabel = 'Delete', onConfirm, onClose }: ConfirmDialogProps) {
+export function ConfirmDialog({ open, title, message, confirmLabel = '削除', onConfirm, onClose }: ConfirmDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<unknown>(null)
@@ -56,10 +56,10 @@ export function ConfirmDialog({ open, title, message, confirmLabel = 'Delete', o
       {error !== null && <ErrorMessage error={error} />}
       <div className="dialog-actions">
         <button type="button" className="button" onClick={onClose} disabled={busy}>
-          Cancel
+          キャンセル
         </button>
         <button type="button" className="button button-danger" onClick={handleConfirm} disabled={busy}>
-          {busy ? 'Working…' : confirmLabel}
+          {busy ? '処理中…' : confirmLabel}
         </button>
       </div>
     </dialog>

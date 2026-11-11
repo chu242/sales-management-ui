@@ -40,17 +40,17 @@ function ProductEdit({ id }: { id: number }) {
   async function handleSubmit(values: ProductFormValues) {
     const changes = changedFields(product!, values)
     if (Object.keys(changes).length === 0) {
-      navigate(`/products/${id}`, { state: { notice: 'Nothing changed.' } })
+      navigate(`/products/${id}`, { state: { notice: '変更はありません。' } })
       return
     }
     await updateProduct(id, changes)
-    navigate(`/products/${id}`, { state: { notice: 'Product updated.' } })
+    navigate(`/products/${id}`, { state: { notice: '商品を更新しました。' } })
   }
 
   return (
     <>
-      <PageHeader title={`Edit ${product.name}`} />
-      <ProductForm initial={product} submitLabel="Save changes" onSubmit={handleSubmit} onCancel={() => navigate(`/products/${id}`)} />
+      <PageHeader title={`${product.name} の編集`} />
+      <ProductForm initial={product} submitLabel="保存" onSubmit={handleSubmit} onCancel={() => navigate(`/products/${id}`)} />
     </>
   )
 }

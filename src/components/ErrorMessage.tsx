@@ -15,7 +15,7 @@ export function ErrorMessage({ error, onRetry }: ErrorMessageProps) {
       <span>{errorMessage(error)}</span>
       {onRetry && !isClientError && (
         <button type="button" className="button button-small" onClick={onRetry}>
-          Retry
+          再試行
         </button>
       )}
     </div>

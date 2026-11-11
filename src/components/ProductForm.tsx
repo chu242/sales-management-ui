@@ -26,10 +26,10 @@ const PRICE_PATTERN = /^\d+(\.\d{1,2})?$/
 function validate(values: ProductFormValues): FieldErrors {
   const errors: FieldErrors = {}
   const name = values.name.trim()
-  if (!name) errors.name = 'Name is required.'
-  else if (name.length > 100) errors.name = 'Name must be at most 100 characters.'
-  if (!PRICE_PATTERN.test(values.price.trim())) errors.price = 'Enter a price of 0 or more with at most 2 decimals, e.g. 12.50.'
-  if (!/^\d+$/.test(values.stock.trim())) errors.stock = 'Stock must be a whole number of 0 or more.'
+  if (!name) errors.name = '商品名を入力してください。'
+  else if (name.length > 100) errors.name = '商品名は100文字以内で入力してください。'
+  if (!PRICE_PATTERN.test(values.price.trim())) errors.price = '商品価格は0以上、小数点以下2桁までの数値で入力してください（例: 12.50）。'
+  if (!/^\d+$/.test(values.stock.trim())) errors.stock = '数量は0以上の整数で入力してください。'
   return errors
 }
 
@@ -87,29 +87,29 @@ export function ProductForm({ initial, submitLabel, onSubmit, onCancel }: Produc
       {submitError !== null && <ErrorMessage error={submitError} />}
 
       {initial && (
-        <FormField id="product-code" label="Code">
+        <FormField id="product-code" label="商品コード">
           <input id="product-code" type="text" value={initial.code} readOnly />
         </FormField>
       )}
 
-      <FormField id="product-name" label="Name" error={fieldErrors.name}>
+      <FormField id="product-name" label="商品名" error={fieldErrors.name}>
         <input type="text" maxLength={100} autoComplete="off" autoFocus {...inputProps('name')} />
       </FormField>
 
-      <FormField id="product-price" label="Price" error={fieldErrors.price}>
+      <FormField id="product-price" label="商品価格" error={fieldErrors.price}>
         <input type="text" inputMode="decimal" placeholder="0.00" {...inputProps('price')} />
       </FormField>
 
-      <FormField id="product-stock" label="Stock" error={fieldErrors.stock}>
+      <FormField id="product-stock" label="数量" error={fieldErrors.stock}>
         <input type="number" min={0} step={1} {...inputProps('stock')} />
       </FormField>
 
       <div className="form-actions">
         <button type="button" className="button" onClick={onCancel} disabled={submitting}>
-          Cancel
+          キャンセル
         </button>
         <button type="submit" className="button button-primary" disabled={submitting}>
-          {submitting ? 'Saving…' : submitLabel}
+          {submitting ? '保存中…' : submitLabel}
         </button>
       </div>
     </form>

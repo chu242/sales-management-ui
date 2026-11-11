@@ -26,10 +26,10 @@ export function ProductListPage() {
   return (
     <>
       <PageHeader
-        title="Products"
+        title="商品一覧"
         actions={
           <Link to="/products/new" className="button button-primary">
-            New product
+            登録
           </Link>
         }
       />
@@ -40,20 +40,20 @@ export function ProductListPage() {
       {products && (
         <DataTable
           columns={[
-            { header: 'Code', render: (p) => <Link to={`/products/${p.id}`}>{p.code}</Link> },
-            { header: 'Name', render: (p) => p.name },
-            { header: 'Price', render: (p) => formatMoney(p.price), align: 'right' },
-            { header: 'Stock', render: (p) => p.stock, align: 'right' },
+            { header: '商品コード', render: (p) => <Link to={`/products/${p.id}`}>{p.code}</Link> },
+            { header: '商品名', render: (p) => p.name },
+            { header: '商品価格', render: (p) => formatMoney(p.price), align: 'right' },
+            { header: '数量', render: (p) => p.stock, align: 'right' },
             {
-              header: 'Actions',
+              header: '状態',
               align: 'right',
               render: (p) => (
                 <div className="row-actions">
                   <Link to={`/products/${p.id}/edit`} className="button button-small">
-                    Edit
+                    編集
                   </Link>
                   <button type="button" className="button button-small button-danger" onClick={() => setToDelete(p)}>
-                    Delete
+                    削除
                   </button>
                 </div>
               ),
@@ -61,10 +61,10 @@ export function ProductListPage() {
           ]}
           rows={products}
           rowKey={(p) => p.id}
-          emptyMessage="No products yet."
+          emptyMessage="商品はまだ登録されていません。"
           emptyAction={
             <Link to="/products/new" className="button button-primary">
-              Create the first product
+              最初の商品を登録
             </Link>
           }
         />
@@ -72,8 +72,8 @@ export function ProductListPage() {
 
       <ConfirmDialog
         open={toDelete !== null}
-        title="Delete product?"
-        message={`"${toDelete?.name ?? ''}" will be permanently deleted. Products that appear in sales cannot be deleted.`}
+        title="商品を削除しますか？"
+        message={`「${toDelete?.name ?? ''}」を完全に削除します。売上に含まれる商品は削除できません。`}
         onConfirm={confirmDelete}
         onClose={() => setToDelete(null)}
       />

@@ -40,16 +40,16 @@ export function SaleListPage() {
   return (
     <>
       <PageHeader
-        title="Sales"
+        title="売上一覧"
         actions={
           <Link to="/sales/new" className="button button-primary">
-            New sale
+            登録
           </Link>
         }
       />
 
       <form className="search-form" onSubmit={handleSubmit}>
-        <FormField id="search-date" label="Sales Date">
+        <FormField id="search-date" label="売上日">
           <input
             id="search-date"
             type="date"
@@ -57,7 +57,7 @@ export function SaleListPage() {
             onChange={(event) => setValues({ ...values, date: event.target.value })}
           />
         </FormField>
-        <FormField id="search-product" label="Product Name">
+        <FormField id="search-product" label="商品名">
           <input
             id="search-product"
             type="text"
@@ -66,7 +66,7 @@ export function SaleListPage() {
           />
         </FormField>
         <button type="submit" className="button button-primary">
-          Search
+          検索
         </button>
       </form>
 
@@ -75,19 +75,19 @@ export function SaleListPage() {
       {sales && (
         <DataTable
           columns={[
-            { header: 'Sale Code', render: (s) => <Link to={`/sales/${s.id}`}>{s.code}</Link> },
-            { header: 'Date', render: (s) => formatDateTime(s.sale_date) },
-            { header: 'Products', render: (s) => s.details.map((d) => d.product_name).join(', ') },
-            { header: 'Items', render: (s) => s.details.reduce((sum, d) => sum + d.quantity, 0), align: 'right' },
-            { header: 'Total', render: (s) => formatMoney(s.total_amount), align: 'right' },
+            { header: '売上コード', render: (s) => <Link to={`/sales/${s.id}`}>{s.code}</Link> },
+            { header: '売上日時', render: (s) => formatDateTime(s.sale_date) },
+            { header: '商品', render: (s) => s.details.map((d) => d.product_name).join(', ') },
+            { header: '数量', render: (s) => s.details.reduce((sum, d) => sum + d.quantity, 0), align: 'right' },
+            { header: '合計金額', render: (s) => formatMoney(s.total_amount), align: 'right' },
           ]}
           rows={sales.filter((sale) => matchesSearch(sale, search))}
           rowKey={(s) => s.id}
-          emptyMessage={isSearching ? 'No sales match your search.' : 'No sales yet.'}
+          emptyMessage={isSearching ? '検索条件に一致する売上はありません。' : '売上はまだありません。'}
           emptyAction={
             isSearching ? undefined : (
               <Link to="/sales/new" className="button button-primary">
-                Record the first sale
+                最初の売上を登録
               </Link>
             )
           }
