@@ -28,7 +28,7 @@ function ProductDetail({ id }: { id: number }) {
 
   async function confirmDelete() {
     await deleteProduct(id)
-    navigate('/products', { state: { notice: `Product "${product?.name}" was deleted.` } })
+    navigate('/products', { state: { notice: `商品「${product?.name}」を削除しました。` } })
   }
 
   return (
@@ -38,10 +38,10 @@ function ProductDetail({ id }: { id: number }) {
         actions={
           <>
             <Link to={`/products/${id}/edit`} className="button">
-              Edit
+              編集
             </Link>
             <button type="button" className="button button-danger" onClick={() => setConfirming(true)}>
-              Delete
+              削除
             </button>
           </>
         }
@@ -51,22 +51,22 @@ function ProductDetail({ id }: { id: number }) {
       <dl className="details">
         <dt>ID</dt>
         <dd>{product.id}</dd>
-        <dt>Code</dt>
+        <dt>商品コード</dt>
         <dd>{product.code}</dd>
-        <dt>Price</dt>
+        <dt>商品価格</dt>
         <dd>{formatMoney(product.price)}</dd>
-        <dt>Stock</dt>
+        <dt>数量</dt>
         <dd>{product.stock}</dd>
       </dl>
 
       <p>
-        <Link to="/products">← Back to products</Link>
+        <Link to="/products">← 商品一覧へ戻る</Link>
       </p>
 
       <ConfirmDialog
         open={confirming}
-        title="Delete product?"
-        message={`"${product.name}" will be permanently deleted. Products that appear in sales cannot be deleted.`}
+        title="商品を削除しますか？"
+        message={`「${product.name}」を完全に削除します。売上に含まれる商品は削除できません。`}
         onConfirm={confirmDelete}
         onClose={() => setConfirming(false)}
       />

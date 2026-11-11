@@ -24,13 +24,13 @@ export function SaleItemsEditor({ products, rows, onChange, errors, disabled }: 
         <table className="table">
           <thead>
             <tr>
-              <th>Product</th>
-              <th className="align-right">Unit price</th>
-              <th className="align-right">In stock</th>
-              <th>Quantity</th>
-              <th className="align-right">Subtotal</th>
+              <th>商品</th>
+              <th className="align-right">単価</th>
+              <th className="align-right">在庫数</th>
+              <th>数量</th>
+              <th className="align-right">小計</th>
               <th>
-                <span className="visually-hidden">Actions</span>
+                <span className="visually-hidden">操作</span>
               </th>
             </tr>
           </thead>
@@ -47,17 +47,17 @@ export function SaleItemsEditor({ products, rows, onChange, errors, disabled }: 
                 <tr key={row.key}>
                   <td>
                     <select
-                      aria-label={`Product for line ${index + 1}`}
+                      aria-label={`${index + 1}行目の商品`}
                       value={row.productId}
                       onChange={(event) => update(index, { productId: event.target.value })}
                       aria-invalid={Boolean(productError)}
                       disabled={disabled}
                     >
-                      <option value="">Select a product…</option>
+                      <option value="">-</option>
                       {products.map((p) => (
                         <option key={p.id} value={p.id} disabled={usedElsewhere.has(String(p.id)) || p.stock === 0}>
                           {p.name}
-                          {p.stock === 0 ? ' (out of stock)' : ''}
+                          {p.stock === 0 ? '（在庫切れ）' : ''}
                         </option>
                       ))}
                     </select>
@@ -69,7 +69,7 @@ export function SaleItemsEditor({ products, rows, onChange, errors, disabled }: 
                     <input
                       type="number"
                       className="quantity-input"
-                      aria-label={`Quantity for line ${index + 1}`}
+                      aria-label={`${index + 1}行目の数量`}
                       min={1}
                       max={product?.stock}
                       step={1}
@@ -87,9 +87,9 @@ export function SaleItemsEditor({ products, rows, onChange, errors, disabled }: 
                       className="button button-small"
                       onClick={() => onChange(rows.filter((_, i) => i !== index))}
                       disabled={disabled || rows.length === 1}
-                      aria-label={`Remove line ${index + 1}`}
+                      aria-label={`${index + 1}行目を削除`}
                     >
-                      Remove
+                      削除
                     </button>
                   </td>
                 </tr>
@@ -104,7 +104,7 @@ export function SaleItemsEditor({ products, rows, onChange, errors, disabled }: 
         onClick={() => onChange([...rows, newSaleItemRow()])}
         disabled={disabled || rows.length >= products.length}
       >
-        + Add product
+        ＋ 商品追加
       </button>
     </div>
   )

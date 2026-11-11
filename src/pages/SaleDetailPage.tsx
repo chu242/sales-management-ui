@@ -26,33 +26,33 @@ function SaleDetail({ id }: { id: number }) {
 
   return (
     <>
-      <PageHeader title={`Sale ${sale.code}`} />
+      <PageHeader title={`売上 ${sale.code}`} />
       <Notice />
 
       <dl className="details">
-        <dt>Date</dt>
+        <dt>売上日時</dt>
         <dd>{formatDateTime(sale.sale_date)}</dd>
-        <dt>Total</dt>
+        <dt>合計金額</dt>
         <dd>{formatMoney(sale.total_amount)}</dd>
       </dl>
 
       <section className="section">
-        <h2>Sale details</h2>
-        <p className="muted">Unit prices are the prices at the time of sale.</p>
+        <h2>売上明細</h2>
+        <p className="muted">単価は販売時点の価格です。</p>
         <DataTable
           columns={[
-            { header: 'Product', render: (d) => <Link to={`/products/${d.product_id}`}>{d.product_name}</Link> },
-            { header: 'Quantity', render: (d) => d.quantity, align: 'right' },
-            { header: 'Unit price', render: (d) => formatMoney(d.unit_price), align: 'right' },
-            { header: 'Subtotal', render: (d) => formatMoney(d.subtotal), align: 'right' },
+            { header: '商品名', render: (d) => <Link to={`/products/${d.product_id}`}>{d.product_name}</Link> },
+            { header: '数量', render: (d) => d.quantity, align: 'right' },
+            { header: '単価', render: (d) => formatMoney(d.unit_price), align: 'right' },
+            { header: '小計', render: (d) => formatMoney(d.subtotal), align: 'right' },
           ]}
           rows={sale.details}
           rowKey={(d) => d.id}
-          emptyMessage="This sale has no items."
+          emptyMessage="この売上には明細がありません。"
           footer={
             <tr>
               <th colSpan={3} className="align-right">
-                Total
+                合計
               </th>
               <td className="align-right">
                 <strong>{formatMoney(sale.total_amount)}</strong>
@@ -63,7 +63,7 @@ function SaleDetail({ id }: { id: number }) {
       </section>
 
       <p>
-        <Link to="/sales">← Back to sales</Link>
+        <Link to="/sales">← 売上一覧へ戻る</Link>
       </p>
     </>
   )
