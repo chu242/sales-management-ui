@@ -21,9 +21,9 @@ function validate(rows: SaleItemRow[], products: Product[]): FieldErrors {
   rows.forEach((row, index) => {
     const product = products.find((p) => String(p.id) === row.productId)
     const quantity = Number(row.quantity)
-    if (!product) errors[`items.${index}.product_id`] = 'Select a product.'
-    if (!/^\d+$/.test(row.quantity) || quantity <= 0) errors[`items.${index}.quantity`] = 'Enter a whole number of 1 or more.'
-    else if (product && quantity > product.stock) errors[`items.${index}.quantity`] = `Only ${product.stock} in stock.`
+    if (!product) errors[`items.${index}.product_id`] = '商品を選択してください。'
+    if (!/^\d+$/.test(row.quantity) || quantity <= 0) errors[`items.${index}.quantity`] = '1以上の整数を入力してください。'
+    else if (product && quantity > product.stock) errors[`items.${index}.quantity`] = `在庫は${product.stock}個しかありません。`
   })
   return errors
 }
@@ -36,13 +36,13 @@ export function SaleCreatePage() {
 
   return (
     <>
-      <PageHeader title="New sale" />
+      <PageHeader title="売上登録" />
       {products.length === 0 ? (
         <EmptyState
-          message="You need at least one product before recording a sale."
+          message="売上を登録するには、先に商品を1つ以上登録してください。"
           action={
             <Link to="/products/new" className="button button-primary">
-              Create a product
+              商品を登録
             </Link>
           }
         />
@@ -79,7 +79,7 @@ function SaleForm({ products }: { products: Product[] }) {
     setSubmitting(true)
     try {
       const sale = await createSale({ items })
-      navigate(`/sales/${sale.id}`, { state: { notice: 'Sale recorded.' } })
+      navigate(`/sales/${sale.id}`, { state: { notice: '売上を登録しました。' } })
     } catch (err) {
       // 400 not enough stock / 404 product gone: show the backend's message above the form.
       // 422: also highlight the matching rows.
@@ -97,16 +97,16 @@ function SaleForm({ products }: { products: Product[] }) {
       <SaleItemsEditor products={products} rows={rows} onChange={changeRows} errors={fieldErrors} disabled={submitting} />
 
       <p className="estimated-total">
-        Estimated total: <strong>{estimatedTotal === null ? '–' : formatCents(estimatedTotal)}</strong>
-        <span className="muted"> (final total is calculated by the server)</span>
+        合計金額（見込み）: <strong>{estimatedTotal === null ? '–' : formatCents(estimatedTotal)}</strong>
+        <span className="muted">（確定金額はサーバーで計算されます）</span>
       </p>
 
       <div className="form-actions">
         <button type="button" className="button" onClick={() => navigate('/sales')} disabled={submitting}>
-          Cancel
+          キャンセル
         </button>
         <button type="submit" className="button button-primary" disabled={submitting}>
-          {submitting ? 'Saving…' : 'Record sale'}
+          {submitting ? '保存中…' : '登録'}
         </button>
       </div>
     </form>

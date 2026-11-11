@@ -6,13 +6,13 @@ export function Layout() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
-          <span className="brand">Sales Manager</span>
+          <span className="brand">販売管理</span>
           <nav className="nav">
             <NavLink to="/" end>
-              Dashboard
+              ダッシュボード
             </NavLink>
-            <NavLink to="/products">Products</NavLink>
-            <NavLink to="/sales">Sales</NavLink>
+            <NavLink to="/products">商品</NavLink>
+            <NavLink to="/sales">売上</NavLink>
           </nav>
         </div>
       </header>

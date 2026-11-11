@@ -12,13 +12,13 @@ export function ProductCreatePage() {
       price: values.price.trim(), // sent as a string so the decimal stays exact
       stock: Number(values.stock),
     })
-    navigate(`/products/${product.id}`, { state: { notice: 'Product created.' } })
+    navigate(`/products/${product.id}`, { state: { notice: '商品を登録しました。' } })
   }
 
   return (
     <>
-      <PageHeader title="New product" />
-      <ProductForm submitLabel="Create product" onSubmit={handleSubmit} onCancel={() => navigate('/products')} />
+      <PageHeader title="商品登録" />
+      <ProductForm submitLabel="登録" onSubmit={handleSubmit} onCancel={() => navigate('/products')} />
     </>
   )
 }

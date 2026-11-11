@@ -5,12 +5,12 @@ import { PageHeader } from '../components/PageHeader'
 export function NotFoundPage() {
   return (
     <>
-      <PageHeader title="Page not found" />
+      <PageHeader title="ページが見つかりません" />
       <EmptyState
-        message="The page you are looking for does not exist."
+        message="お探しのページは存在しません。"
         action={
           <Link to="/" className="button">
-            Go to the dashboard
+            ダッシュボードへ戻る
           </Link>
         }
       />

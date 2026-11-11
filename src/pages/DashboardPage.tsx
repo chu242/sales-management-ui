@@ -33,50 +33,50 @@ export function DashboardPage() {
   return (
     <>
       <PageHeader
-        title="Dashboard"
+        title="ダッシュボード"
         actions={
           <Link to="/sales/new" className="button button-primary">
-            New sale
+            売上登録
           </Link>
         }
       />
 
       <div className="stat-grid">
-        <StatCard label="Products" value={products.length} />
-        <StatCard label="Units in stock" value={unitsInStock.toLocaleString()} />
-        <StatCard label="Sales" value={sales.length} />
-        <StatCard label="Total revenue" value={formatCents(revenueCents)} />
+        <StatCard label="商品数" value={products.length} />
+        <StatCard label="在庫総数" value={unitsInStock.toLocaleString()} />
+        <StatCard label="売上件数" value={sales.length} />
+        <StatCard label="売上合計" value={formatCents(revenueCents)} />
       </div>
 
       <section className="section">
-        <h2>Low stock (≤ {LOW_STOCK_THRESHOLD})</h2>
+        <h2>在庫僅少（{LOW_STOCK_THRESHOLD}以下）</h2>
         <DataTable
           columns={[
-            { header: 'Product', render: (p) => <Link to={`/products/${p.id}`}>{p.name}</Link> },
-            { header: 'Price', render: (p) => formatMoney(p.price), align: 'right' },
-            { header: 'Stock', render: (p) => <span className={p.stock === 0 ? 'text-danger' : undefined}>{p.stock}</span>, align: 'right' },
+            { header: '商品名', render: (p) => <Link to={`/products/${p.id}`}>{p.name}</Link> },
+            { header: '商品価格', render: (p) => formatMoney(p.price), align: 'right' },
+            { header: '数量', render: (p) => <span className={p.stock === 0 ? 'text-danger' : undefined}>{p.stock}</span>, align: 'right' },
           ]}
           rows={lowStock}
           rowKey={(p) => p.id}
-          emptyMessage="All products are well stocked."
+          emptyMessage="在庫が少ない商品はありません。"
         />
       </section>
 
       <section className="section">
-        <h2>Recent sales</h2>
+        <h2>最近の売上</h2>
         <DataTable
           columns={[
-            { header: 'Sale Code', render: (s) => <Link to={`/sales/${s.id}`}>{s.code}</Link> },
-            { header: 'Date', render: (s) => formatDateTime(s.sale_date) },
-            { header: 'Items', render: (s) => s.details.length, align: 'right' },
-            { header: 'Total', render: (s) => formatMoney(s.total_amount), align: 'right' },
+            { header: '売上コード', render: (s) => <Link to={`/sales/${s.id}`}>{s.code}</Link> },
+            { header: '売上日時', render: (s) => formatDateTime(s.sale_date) },
+            { header: '明細数', render: (s) => s.details.length, align: 'right' },
+            { header: '合計金額', render: (s) => formatMoney(s.total_amount), align: 'right' },
           ]}
           rows={recentSales}
           rowKey={(s) => s.id}
-          emptyMessage="No sales yet."
+          emptyMessage="売上はまだありません。"
           emptyAction={
             <Link to="/sales/new" className="button button-primary">
-              Record the first sale
+              最初の売上を登録
             </Link>
           }
         />
